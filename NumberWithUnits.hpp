@@ -21,13 +21,11 @@ namespace ariel {
 
         //<<<<<<<================== ostream start ==================>>>>>>>
         friend std::ostream &operator<<(std::ostream &os, const NumberWithUnits &unit);
-        //<<<<<<<================== ostream end ==================>>>>>>>
+        //<<<<<<<================== ostream end   ==================>>>>>>>
 
         //<<<<<<<================== istream start ==================>>>>>>>
         friend std::istream &operator>>(std::istream &is, NumberWithUnits &unit);
-        //<<<<<<<================== istream end ==================>>>>>>>
-
-        //TODO: --/++/+=/-= -> check how to remove friend!!
+        //<<<<<<<================== istream end   ==================>>>>>>>
 
         //<<<<<<<================== -/-- start ==================>>>>>>>
         friend NumberWithUnits operator-(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
@@ -36,8 +34,8 @@ namespace ariel {
 
         friend NumberWithUnits operator--(const NumberWithUnits &unit, int);
 
-        NumberWithUnits operator--(const NumberWithUnits &unit);
-        //<<<<<<<================== -/-- end ==================>>>>>>>
+        friend NumberWithUnits operator--(const NumberWithUnits &unit);
+        //<<<<<<<================== -/-- end   ==================>>>>>>>
 
         //<<<<<<<================== +/++ start ==================>>>>>>>
         friend NumberWithUnits operator+(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
@@ -46,46 +44,44 @@ namespace ariel {
 
         friend NumberWithUnits operator++(const NumberWithUnits &unit);
 
-        NumberWithUnits operator++(const NumberWithUnits &unit, int);
-        //<<<<<<<================== +/++ end ==================>>>>>>>
+        friend NumberWithUnits operator++(const NumberWithUnits &unit, int);
+        //<<<<<<<================== +/++ end   ==================>>>>>>>
 
         //<<<<<<<================== * start ==================>>>>>>>
-        friend NumberWithUnits operator*(double val, const NumberWithUnits &unit);
-
         friend NumberWithUnits operator*(const NumberWithUnits &unit, double val);
-        //<<<<<<<================== * end ==================>>>>>>>
+        //<<<<<<<================== * end   ==================>>>>>>>
 
         //<<<<<<<================== += start ==================>>>>>>>
-        NumberWithUnits operator+=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== += end ==================>>>>>>>
+        friend NumberWithUnits operator+=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
+        //<<<<<<<================== += end   ==================>>>>>>>
 
         //<<<<<<<================== -= start ==================>>>>>>>
-        NumberWithUnits operator-=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== -= end ==================>>>>>>>
+        friend NumberWithUnits operator-=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
+        //<<<<<<<================== -= end   ==================>>>>>>>
 
         //<<<<<<<================== == start ==================>>>>>>>
         friend bool operator==(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== == end ==================>>>>>>>
+        //<<<<<<<================== == end   ==================>>>>>>>
 
         //<<<<<<<================== != start ==================>>>>>>>
         friend bool operator!=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== != end ==================>>>>>>>
+        //<<<<<<<================== != end   ==================>>>>>>>
 
         //<<<<<<<================== < start ==================>>>>>>>
         friend bool operator<(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== < end ==================>>>>>>>
+        //<<<<<<<================== < end   ==================>>>>>>>
 
         //<<<<<<<================== > start ==================>>>>>>>
         friend bool operator>(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== > end ==================>>>>>>>
+        //<<<<<<<================== > end   ==================>>>>>>>
 
         //<<<<<<<================== <= start ==================>>>>>>>
         friend bool operator<=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== <= end ==================>>>>>>>
+        //<<<<<<<================== <= end   ==================>>>>>>>
 
         //<<<<<<<================== >= start ==================>>>>>>>
         friend bool operator>=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
-        //<<<<<<<================== >= end ==================>>>>>>>
+        //<<<<<<<================== >= end   ==================>>>>>>>
     };
 }
 #endif

@@ -51,10 +51,6 @@ namespace ariel {
         return NumberWithUnits(0, "");
     }
 
-    NumberWithUnits operator*(double val, const NumberWithUnits &unit) {
-        return NumberWithUnits(0, "");
-    }
-
     NumberWithUnits operator*(const NumberWithUnits &unit, double val) {
         return NumberWithUnits(0, "");
     }
@@ -72,7 +68,7 @@ namespace ariel {
     }
 
     bool operator!=(const NumberWithUnits &unit1, const NumberWithUnits &unit2) {
-        return !(ariel::operator==(unit1, unit2));
+        return !(operator==(unit1, unit2));
     }
 
     bool operator<(const NumberWithUnits &unit1, const NumberWithUnits &unit2) {
