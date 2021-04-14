@@ -36,7 +36,7 @@ namespace ariel {
 
         friend NumberWithUnits operator--(const NumberWithUnits &unit, int);
 
-        friend NumberWithUnits operator--(const NumberWithUnits &unit);
+        NumberWithUnits operator--(const NumberWithUnits &unit);
         //<<<<<<<================== -/-- end ==================>>>>>>>
 
         //<<<<<<<================== +/++ start ==================>>>>>>>
@@ -46,7 +46,7 @@ namespace ariel {
 
         friend NumberWithUnits operator++(const NumberWithUnits &unit);
 
-        friend NumberWithUnits operator++(const NumberWithUnits &unit, int);
+        NumberWithUnits operator++(const NumberWithUnits &unit, int);
         //<<<<<<<================== +/++ end ==================>>>>>>>
 
         //<<<<<<<================== * start ==================>>>>>>>
@@ -56,11 +56,11 @@ namespace ariel {
         //<<<<<<<================== * end ==================>>>>>>>
 
         //<<<<<<<================== += start ==================>>>>>>>
-        friend NumberWithUnits operator+=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
+        NumberWithUnits operator+=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
         //<<<<<<<================== += end ==================>>>>>>>
 
         //<<<<<<<================== -= start ==================>>>>>>>
-        friend NumberWithUnits operator-=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
+        NumberWithUnits operator-=(const NumberWithUnits &unit1, const NumberWithUnits &unit2);
         //<<<<<<<================== -= end ==================>>>>>>>
 
         //<<<<<<<================== == start ==================>>>>>>>
