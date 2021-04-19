@@ -1,3 +1,10 @@
+/**
+ * Demo file for the exercise on numbers with units
+ *
+ * @author Erel Segal-Halevi
+ * @since 2019-02
+ */
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
