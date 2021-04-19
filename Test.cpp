@@ -18,21 +18,20 @@ double roundFourDigits(double val, double unitSize) {
 TEST_CASE("Testing first row") {
     //This test tests only first row of the units file, works on every type of unit.
     ifstream units_file{"units.txt"};
+    if (units_file.fail() || units_file.bad() || units_file.eof()) {
+                FAIL("Error in opening file");
+    }
     NumberWithUnits::read_units(units_file);
 
     string firstUnitName;
     string secondUnitName;
     double secondUnit;
-    if (units_file.fail() || units_file.bad() || units_file.eof()) {
-        FAIL("Error in opening file");
-    }
+
     units_file.ignore(2) >> firstUnitName;
     units_file.ignore(2) >> secondUnit >> secondUnitName;
+    units_file.clear();
+    units_file.seekg(0);
     units_file.close();
-
-    cout << firstUnitName << endl;
-    cout << secondUnit << endl;
-    cout << secondUnitName << endl;
 
     NumberWithUnits a{1, firstUnitName};
     NumberWithUnits b{4, firstUnitName};
@@ -58,10 +57,10 @@ TEST_CASE("Testing first row") {
 
 
     // Test + and - with different unit but same category
-    CHECK((a + c) == NumberWithUnits(roundFourDigits(secondUnit + 240), firstUnitName));
-    CHECK((b + c) == NumberWithUnits(roundFourDigits(secondUnit * 4 + 240), firstUnitName));
-    CHECK((a - c) == NumberWithUnits(roundFourDigits(secondUnit - 240), firstUnitName));
-    CHECK((b - c) == NumberWithUnits(roundFourDigits(secondUnit * 4 - 240), firstUnitName));
+    CHECK((a + c) == NumberWithUnits(roundFourDigits(secondUnit + 240, secondUnit), firstUnitName));
+    CHECK((b + c) == NumberWithUnits(roundFourDigits(secondUnit * 4 + 240, secondUnit), firstUnitName));
+    CHECK((a - c) == NumberWithUnits(roundFourDigits(secondUnit - 240, secondUnit), firstUnitName));
+    CHECK((b - c) == NumberWithUnits(roundFourDigits(secondUnit * 4 - 240, secondUnit), firstUnitName));
 
     CHECK((c + a) == NumberWithUnits(secondUnit + 240, secondUnitName));
     CHECK((c + b) == NumberWithUnits(secondUnit * 4 + 240, secondUnitName));
@@ -78,8 +77,8 @@ TEST_CASE("Testing first row") {
     CHECK((d -= e) == NumberWithUnits(-3, firstUnitName)); // d = -3
     CHECK((e -= d) == NumberWithUnits(14, firstUnitName)); // e = 14
 
-    CHECK((d += f) == NumberWithUnits(roundFourDigits(secondUnit * (-3) + 543), firstUnitName)); // d = -2.457
-    CHECK((e -= f) == NumberWithUnits(roundFourDigits(secondUnit * 14 - 543), firstUnitName)); // e = 13.457
+    CHECK((d += f) == NumberWithUnits(roundFourDigits(secondUnit * (-3) + 543, secondUnit), firstUnitName)); // d = -2.457
+    CHECK((e -= f) == NumberWithUnits(roundFourDigits(secondUnit * 14 - 543, secondUnit), firstUnitName)); // e = 13.457
 
     NumberWithUnits g{5, firstUnitName};
     NumberWithUnits h{3, firstUnitName};
@@ -89,6 +88,7 @@ TEST_CASE("Testing first row") {
     // Test unary operation on "m"
     CHECK((+c) == NumberWithUnits(240, secondUnitName));
     CHECK((-c) == NumberWithUnits(-240, secondUnitName));
+
 
     // Test ++ and -- prefix and suffix
     CHECK((c++) == NumberWithUnits(241,secondUnitName));
@@ -127,13 +127,13 @@ TEST_CASE("Testing first row") {
     CHECK((c <= a) == true);
     CHECK((c != a) == true);
 
-    NumberWithUnits f{2.5, firstUnitName};
-    NumberWithUnits g{2.5 * secondUnit, secondUnitName};
+    NumberWithUnits i{2.5, firstUnitName};
+    NumberWithUnits j{2.5 * secondUnit, secondUnitName};
 
-    CHECK((f == g) == true);
-    CHECK((f >= g) == true);
-    CHECK((g <= f) == true);
-    CHECK((f != g) == false);
+    CHECK((i == j) == true);
+    CHECK((i >= j) == true);
+    CHECK((i <= j) == true);
+    CHECK((i != j) == false);
 }
 
 TEST_CASE("Testing custom units") {
@@ -246,5 +246,13 @@ TEST_CASE("Test throws"){
     CHECK_THROWS(NumberWithUnits f(1,"kmm"));
     CHECK_THROWS(NumberWithUnits g(1,"k"));
     CHECK_THROWS(NumberWithUnits h(1,"K"));
+
+    NumberWithUnits a{10,"km"};
+    NumberWithUnits b{5,"ILS"};
+
+    CHECK_THROWS(a + b);
+    CHECK_THROWS(a - b);
+    CHECK_THROWS(a += b);
+    CHECK_THROWS(a -= b);
 }
 

@@ -49,6 +49,7 @@ namespace ariel {
 
         //<<<<<<<================== * start ==================>>>>>>>
         friend NumberWithUnits operator*(const NumberWithUnits &unit, double val);
+        friend NumberWithUnits operator*(double val, const NumberWithUnits &unit);
         //<<<<<<<================== * end   ==================>>>>>>>
 
         //<<<<<<<================== += start ==================>>>>>>>
